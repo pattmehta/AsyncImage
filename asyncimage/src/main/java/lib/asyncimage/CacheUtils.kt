@@ -43,7 +43,7 @@ internal class CacheUtils {
     }
 
     companion object {
-        var debug = true
+        var debug = false
         lateinit var application: Application
         private const val base64StringSkipTrailingCount = 15
 
@@ -71,12 +71,12 @@ internal class CacheUtils {
 
         fun listCache() {
             if (debug) {
-                val files = mutableListOf<String>()
-                cacheDir(application = application).listFiles()?.toString()?.let {
-                    files.add(it)
+                val fileNames = mutableListOf<String>()
+                cacheDir(application = application).listFiles()?.let { files ->
+                    files.forEach { fileNames.add(it.name) }
                 }
                 println("CacheUtils: listCache")
-                println(files.joinToString(separator = ","))
+                println(fileNames.joinToString(separator = ","))
             }
         }
     }
