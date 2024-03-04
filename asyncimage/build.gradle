@@ -18,8 +18,6 @@ android {
     defaultConfig {
         minSdk 29
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables {
             useSupportLibrary true
@@ -51,7 +49,7 @@ android {
         flavorDimensions = ["version"]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        kotlinCompilerExtensionVersion '1.5.5'
     }
     packaging {
         resources {
@@ -116,8 +114,8 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.default
                 groupId = 'com.github.pattmehta'
-                artifactId = 'async-image-compose'
-                version = '1.3'
+                artifactId = 'asyncimage'
+                version = '1.4'
             }
         }
     }
