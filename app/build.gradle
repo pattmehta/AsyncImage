@@ -3,13 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-configurations.all {
-    resolutionStrategy {
-        cacheDynamicVersionsFor 6000, 'hours'
-        cacheChangingModulesFor 6000, 'hours'
-    }
-}
-
 android {
     namespace 'lib.asyncimage'
     compileSdk 34

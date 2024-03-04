@@ -4,13 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-configurations.all {
-    resolutionStrategy {
-        cacheDynamicVersionsFor 6000, 'hours'
-        cacheChangingModulesFor 6000, 'hours'
-    }
-}
-
 android {
     namespace 'lib.asyncimage'
     compileSdk 34
@@ -22,10 +15,13 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        aarMetadata {
+            minCompileSdk = 29
+        }
     }
     productFlavors {
         full {
-            dimension "version"
+            dimension "mode"
             aarMetadata {
                 minCompileSdk = 29
             }
@@ -46,7 +42,7 @@ android {
     }
     buildFeatures {
         compose true
-        flavorDimensions = ["version"]
+        flavorDimensions = ["mode"]
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.5'
@@ -56,10 +52,9 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    publishing { // publish aar with jar as a fallback
+    publishing {
         multipleVariants {
             allVariants()
-            withSourcesJar()
         }
     }
 }
@@ -111,11 +106,11 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            release(MavenPublication) {
+            allVariants(MavenPublication) {
                 from components.default
                 groupId = 'com.github.pattmehta'
                 artifactId = 'asyncimage'
-                version = '1.4'
+                version = '1.5'
             }
         }
     }
