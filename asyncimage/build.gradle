@@ -19,13 +19,19 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables {
             useSupportLibrary true
         }
     }
-
+    productFlavors {
+        full {
+            dimension "version"
+            aarMetadata {
+                minCompileSdk = 29
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -41,6 +47,7 @@ android {
     }
     buildFeatures {
         compose true
+        flavorDimensions = ["version"]
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.1'
@@ -48,6 +55,12 @@ android {
     packaging {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    publishing { // publish aar with jar as a fallback
+        multipleVariants {
+            allVariants()
+            withSourcesJar()
         }
     }
 }
