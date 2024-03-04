@@ -73,4 +73,25 @@ with the URL itself. Following utility converts URL to filename.
 
 ### Example
 
-<img src="./readme_img/example.gif" width="500" alt="example" />
+<img src="./readme_img/example.gif" width="300" alt="example" />
+
+#### Details
+
+This library repo is released to [![](https://jitpack.io/v/pattmehta/asyncimage.svg)](https://jitpack.io/#pattmehta/asyncimage).
+To import the full release version, add the jitpack repo to the **settings.gradle** file, and then include it as an `implementation`
+in the app **build.gradle** file.
+
+    // snippet from settings.gradle file
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
+    // snippet from app build.gradle file
+    dependencies {
+        implementation 'com.github.pattmehta:asyncimage:1.5:fullRelease@aar'
+    }
