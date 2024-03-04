@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 configurations.all {
@@ -106,4 +107,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+}
+
+// produce release artifacts (for jitpack) using the above published variants
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.default
+                groupId = 'com.github.pattmehta'
+                artifactId = 'async-image-compose'
+                version = '1.3'
+            }
+        }
+    }
 }
