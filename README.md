@@ -44,6 +44,8 @@ On navigating away from, say, `ExampleScreen`, and returning, the following logs
 - `writeCache` means that the image was loaded for the first time
 - `listCache` is only seen in the logs when any side-effect calling `AsyncImageLoader.debug = true` gets invoked
 
+> logs seen are from consecutive sessions, so older log is also displayed where initially there was no cache
+
 <br/>
 
     lib.asyncimage    I  CacheUtils: listCache
@@ -51,20 +53,17 @@ On navigating away from, say, `ExampleScreen`, and returning, the following logs
     lib.asyncimage    I  CacheUtils: listCache
     lib.asyncimage    I  aHR0cHM6Ly9pLnl0aW1nLmNvbS92aS83QzJ6NEdxcVM1RS9kZ
     lib.asyncimage    I  CacheUtils: readCache
-    lib.asyncimage    I  CacheUtils: listCache
-    lib.asyncimage    I  aHR0cHM6Ly9pLnl0aW1nLmNvbS92aS83QzJ6NEdxcVM1RS9kZ
-    lib.asyncimage    I  CacheUtils: readCache
 
 Hashed string in the log is actually the cached image filename. Such unique hashes bear one to one correspondence
 with the URL itself. Following utility converts URL to filename.
 
-        private fun networkUrlToCacheFilename(url: HttpUrl): String {
-            val urlAsBytes = url.toString().encodeToByteArray()
-            val encodedUrlString = Base64.getUrlEncoder().encodeToString(urlAsBytes)
-            return encodedUrlString.substring(
-                0, encodedUrlString.count() - base64StringSkipTrailingCount
-            )
-        }
+    private fun networkUrlToCacheFilename(url: HttpUrl): String {
+        val urlAsBytes = url.toString().encodeToByteArray()
+        val encodedUrlString = Base64.getUrlEncoder().encodeToString(urlAsBytes)
+        return encodedUrlString.substring(
+            0, encodedUrlString.count() - base64StringSkipTrailingCount
+        )
+    }
 
 ### Platforms
 
